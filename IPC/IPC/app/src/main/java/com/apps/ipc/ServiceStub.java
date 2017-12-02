@@ -2,6 +2,7 @@ package com.apps.ipc;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
@@ -14,12 +15,18 @@ import com.apps.result.GetAppDetailResult;
 public class ServiceStub extends IService.Stub {
     private Context context;
 
+    private IBinder mServiceHello = new ServiceHelloBinder();
+
     public ServiceStub(Context context){
         this.context = context;
     }
 
     public ServiceStub() {
         super();
+    }
+
+    public IBinder getServiceHello(){
+        return mServiceHello;
     }
 
     @Override
@@ -64,4 +71,11 @@ public class ServiceStub extends IService.Stub {
         return  getAppDetailResult;
     }
 
+    private static class ServiceHelloBinder extends IServiceHello.Stub{
+
+        @Override
+        public String sayHello(String name) throws RemoteException {
+            return "Hello "+name;
+        }
+    }
 }

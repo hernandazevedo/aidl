@@ -49,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/post"
-        android:onClick="post"
+        android:text="@string/sayHello"
+        android:onClick="sayHello"
         android:textStyle="bold"/>
 
     <TextView
@@ -58,5 +58,7 @@
         android:layout_height="match_parent"
         android:id="@+id/result"
         />
+
+
 
 </LinearLayout>

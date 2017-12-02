@@ -18,6 +18,7 @@ import com.apps.data.AppDetail;
 import com.apps.data.Constant;
 import com.apps.ipc.ICallback;
 import com.apps.ipc.IService;
+import com.apps.ipc.IServiceHello;
 import com.apps.request.GetAppDetailRequest;
 import com.apps.result.GetAppDetailResult;
 
@@ -58,12 +59,25 @@ public class MainActivity extends AppCompatActivity {
         getAppDetail(id,version);
     }
 
+    public void sayHello(View v){
+
+        if (null != service){
+            try {
+                IBinder serviceHello = service.getServiceHello();
+                System.out.println(IServiceHello.Stub.asInterface(serviceHello).sayHello("Hernand"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private IService service;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             MainActivity.this.service = IService.Stub.asInterface(service);
+//            IServiceHello.Stub.asInterface(this.get)
             result.setText("Service is connected");
         }
 
